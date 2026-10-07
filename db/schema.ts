@@ -1,0 +1,5 @@
+import {sqliteTable,text,integer,index} from 'drizzle-orm/sqlite-core';
+export const jobs=sqliteTable('jobs',{
+  id:text('id').primaryKey(),source:text('source').notNull(),company:text('company').notNull(),title:text('title').notNull(),location:text('location').notNull(),team:text('team').notNull(),applyUrl:text('apply_url').notNull(),description:text('description').notNull(),postedAt:integer('posted_at'),firstSeen:integer('first_seen').notNull(),lastSeen:integer('last_seen').notNull(),salary:text('salary').notNull(),skills:text('skills').notNull(),score:integer('score').notNull(),fit:text('fit').notNull(),reasons:text('reasons').notNull(),active:integer('active').notNull()
+},t=>[index('idx_jobs_active_score').on(t.active,t.score),index('idx_jobs_source_last').on(t.source,t.lastSeen)]);
+export const runs=sqliteTable('runs',{id:text('id').primaryKey(),at:integer('at').notNull(),found:integer('found').notNull(),sources:text('sources').notNull(),report:text('report').notNull()},t=>[index('idx_runs_at').on(t.at)]);
